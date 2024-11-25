@@ -1,5 +1,6 @@
 import PlanetName from "@/components/PlanetName";
-import { Planet, PlanetsResponse } from "@/types/planets.type";
+import { PlanetsResponse } from "@/types/planets.type";
+import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { Button, StyleSheet } from "react-native";
 
@@ -36,6 +37,18 @@ export default function HomeScreen() {
         onPress={() => getData(planets.next!)}
         title="next"
       />
+      <Button
+        onPress={() => {
+          router.push("/(tabs_menus)/settings");
+        }}
+        title="Go to Settings"
+      ></Button>
+      <Button
+        onPress={() => {
+          router.push("/about");
+        }}
+        title="Go to Settings"
+      ></Button>
     </>
   );
 }
