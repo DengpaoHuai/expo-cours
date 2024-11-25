@@ -4,26 +4,38 @@ import { useEffect, useState } from "react";
 import { Button, StyleSheet } from "react-native";
 
 export default function HomeScreen() {
-  const [planets, setPlanets] = useState<Planet[]>([]);
+  const [planets, setPlanets] = useState<PlanetsResponse>({
+    count: 0,
+    next: null,
+    previous: null,
+    results: [],
+  });
+
+  const getData = async (url: string) => {
+    const response = await fetch(url);
+    const data: PlanetsResponse = await response.json();
+    setPlanets(data);
+  };
 
   useEffect(() => {
-    fetch("https://swapi.dev/api/planets")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data: PlanetsResponse) => {
-        console.log(data);
-        setPlanets(data.results);
-      });
+    getData("https://swapi.dev/api/planets");
   }, []);
 
   return (
     <>
-      {planets.map((planet) => {
+      {planets.results.map((planet) => {
         return <PlanetName key={planet.name} name={planet.name} />;
       })}
-      <Button disabled={true} onPress={() => {}} title="previous" />
-      <Button disabled={true} onPress={() => {}} title="next" />
+      <Button
+        disabled={!planets.previous}
+        onPress={() => getData(planets.previous!)}
+        title="previous"
+      />
+      <Button
+        disabled={!planets.next}
+        onPress={() => getData(planets.next!)}
+        title="next"
+      />
     </>
   );
 }
