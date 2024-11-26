@@ -1,0 +1,6 @@
+{
+  "title": "Titre",
+  "form_validation": {
+    "too_long": "Franchement ? C'est impossible d'avoir un nom aussi long. Soyez sérieux ou je serai obligé de vous expulser du site."
+  }
+}

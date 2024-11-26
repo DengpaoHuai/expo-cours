@@ -2,8 +2,10 @@ import PlanetName from "@/components/PlanetName";
 import useConfigStore from "@/stores/config-store";
 import { PlanetsResponse } from "@/types/planets.type";
 import { router } from "expo-router";
+import i18next from "i18next";
 import { useEffect, useState } from "react";
-import { Button, StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
+import { Button, StyleSheet, Text } from "react-native";
 
 export default function HomeScreen() {
   const [planets, setPlanets] = useState<PlanetsResponse>({
@@ -13,7 +15,7 @@ export default function HomeScreen() {
     results: [],
   });
   const { primaryColor } = useConfigStore((state) => state.config.theme);
-
+  const { t } = useTranslation();
   const getData = async (url: string) => {
     const response = await fetch(url);
     const data: PlanetsResponse = await response.json();
@@ -26,6 +28,7 @@ export default function HomeScreen() {
 
   return (
     <>
+      <Text>{i18next.t("title")}</Text>
       {planets.results.map((planet) => {
         return <PlanetName key={planet.name} name={planet.name} />;
       })}
@@ -51,6 +54,12 @@ export default function HomeScreen() {
           router.push("/about");
         }}
         title="Go to Settings"
+      ></Button>
+      <Button
+        onPress={() => {
+          router.push("/contact");
+        }}
+        title="Go to Contact"
       ></Button>
     </>
   );

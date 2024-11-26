@@ -8,6 +8,8 @@ import "react-native-reanimated";
 
 import { getConfig } from "@/features/config/api/get-config";
 import useConfigStore from "@/stores/config-store";
+import { I18nextProvider, useTranslation } from "react-i18next";
+import i18n from "@/lang/lang";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -41,40 +43,41 @@ export default function RootLayout() {
     <>
       {/* <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>*/}
-
-      <ThemeProvider
-        value={{
-          ...DefaultTheme,
-          colors: {
-            ...DefaultTheme.colors,
-            primary: config?.theme.primaryColor as string,
-            background: config?.theme.secondaryColor as string,
-            card: config?.theme.tertiaryColor as string,
-            text: config?.theme.primaryTextColor as string,
-            border: config?.theme.quaternaryColor as string,
-          },
-        }}
-      >
-        <Stack>
-          <Stack.Screen name="index" />
-          <Stack.Screen
-            name="(tabs_menus)"
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen name="+not-found" />
-          <Stack.Screen
-            name="(settings)"
-            options={{
-              headerShown: false,
-            }}
-          />
-        </Stack>
-      </ThemeProvider>
-      <StatusBar style="dark" />
-      {/*</PersistGate>
+      <I18nextProvider i18n={i18n} defaultNS={"translation"}>
+        <ThemeProvider
+          value={{
+            ...DefaultTheme,
+            colors: {
+              ...DefaultTheme.colors,
+              primary: config?.theme.primaryColor as string,
+              background: config?.theme.secondaryColor as string,
+              card: config?.theme.tertiaryColor as string,
+              text: config?.theme.primaryTextColor as string,
+              border: config?.theme.quaternaryColor as string,
+            },
+          }}
+        >
+          <Stack>
+            <Stack.Screen name="index" />
+            <Stack.Screen
+              name="(tabs_menus)"
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="+not-found" />
+            <Stack.Screen
+              name="(settings)"
+              options={{
+                headerShown: false,
+              }}
+            />
+          </Stack>
+        </ThemeProvider>
+        <StatusBar style="dark" />
+        {/*</PersistGate>
       </Provider> */}
+      </I18nextProvider>
     </>
   );
 }
