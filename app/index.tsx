@@ -1,4 +1,5 @@
 import PlanetName from "@/components/PlanetName";
+import useConfigStore from "@/stores/config-store";
 import { PlanetsResponse } from "@/types/planets.type";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
@@ -11,6 +12,7 @@ export default function HomeScreen() {
     previous: null,
     results: [],
   });
+  const { primaryColor } = useConfigStore((state) => state.config.theme);
 
   const getData = async (url: string) => {
     const response = await fetch(url);
@@ -38,6 +40,7 @@ export default function HomeScreen() {
         title="next"
       />
       <Button
+        color={primaryColor}
         onPress={() => {
           router.push("/(tabs_menus)/settings");
         }}

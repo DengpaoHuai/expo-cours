@@ -1,4 +1,5 @@
 import httpClient from "@/lib/api-client";
+import { Icon } from "@/types/icon.type";
 import { AxiosResponse } from "axios";
 
 export type Config = {
@@ -17,8 +18,8 @@ export type Config = {
     listTabs: {
       id: number;
       name: string;
-      icon: string;
-      screen: string;
+      icon: Icon;
+      title: string;
     }[];
   };
 };

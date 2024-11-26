@@ -1,77 +1,39 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { Config, getConfig } from "@/features/config/api/get-config";
-//import { Provider } from "react-redux";
-//import store, { persistor } from "@/store/store";
-//import { PersistGate } from "redux-persist/integration/react";
+import { getConfig } from "@/features/config/api/get-config";
+import useConfigStore from "@/stores/config-store";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
-  const [theme, setTheme] = useState<Config>();
+  const { config, setConfig } = useConfigStore();
 
   useEffect(() => {
     getConfig()
       .then((config) => {
-        setTheme(config.data);
+        setConfig(config.data);
       })
       .catch((error) => {
         console.error(error);
-        setTheme({
-          appName: "My App",
-          theme: {
-            primaryColor: "#6200ee",
-            secondaryColor: "#03dac6",
-            tertiaryColor: "#ffffff",
-            quaternaryColor: "#000000",
-            primaryTextColor: "#000000",
-            secondaryTextColor: "#ffffff",
-            tertiaryTextColor: "#000000",
-            quaternaryTextColor: "#ffffff",
-          },
-          tabBarConfig: {
-            listTabs: [
-              {
-                id: 1,
-                name: "Home",
-                icon: "home",
-                screen: "Home",
-              },
-              {
-                id: 2,
-                name: "Settings",
-                icon: "settings",
-                screen: "Settings",
-              },
-            ],
-          },
-        });
       });
   }, []);
 
   useEffect(() => {
-    if (loaded && theme) {
+    if (loaded && config) {
       SplashScreen.hideAsync();
     }
-  }, [loaded, theme]);
+  }, [loaded, config]);
 
-  if (!loaded && theme) {
+  if (!loaded && config) {
     return null;
   }
 
@@ -85,11 +47,11 @@ export default function RootLayout() {
           ...DefaultTheme,
           colors: {
             ...DefaultTheme.colors,
-            primary: theme?.theme.primaryColor as string,
-            background: theme?.theme.secondaryColor as string,
-            card: theme?.theme.tertiaryColor as string,
-            text: theme?.theme.primaryTextColor as string,
-            border: theme?.theme.quaternaryColor as string,
+            primary: config?.theme.primaryColor as string,
+            background: config?.theme.secondaryColor as string,
+            card: config?.theme.tertiaryColor as string,
+            text: config?.theme.primaryTextColor as string,
+            border: config?.theme.quaternaryColor as string,
           },
         }}
       >
