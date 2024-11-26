@@ -32,14 +32,19 @@ const Contact = () => {
   return (
     <View>
       <Text>Contact</Text>
-      <TextInputHookForm control={control} name="email" placeholder="Email" />
-      {errors.email && <Text>{errors.email.message}</Text>}
+      <TextInputHookForm
+        control={control}
+        name="email"
+        placeholder="Email"
+        error={errors.content?.message}
+      />
+
       <TextInputHookForm
         control={control}
         name="content"
         placeholder="Content"
+        error={errors.content?.message}
       />
-      {errors.content && <Text>{errors.content.message}</Text>}
 
       <Button title="Submit" onPress={handleSubmit(onSubmit)} />
     </View>
