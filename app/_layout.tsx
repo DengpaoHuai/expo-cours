@@ -22,13 +22,13 @@ export default function RootLayout() {
   const { config, setConfig } = useConfigStore();
 
   useEffect(() => {
-    getConfig()
+    /*getConfig()
       .then((config) => {
         setConfig(config.data);
       })
       .catch((error) => {
         console.error(error);
-      });
+      });*/
   }, []);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function RootLayout() {
             colors: {
               ...DefaultTheme.colors,
               primary: config?.theme.primaryColor as string,
-              background: config?.theme.secondaryColor as string,
+              background: "#fff",
               card: config?.theme.tertiaryColor as string,
               text: config?.theme.primaryTextColor as string,
               border: config?.theme.quaternaryColor as string,
@@ -60,7 +60,6 @@ export default function RootLayout() {
           }}
         >
           <Stack>
-            <Stack.Screen name="index" />
             <Stack.Screen
               name="(tabs_menus)"
               options={{

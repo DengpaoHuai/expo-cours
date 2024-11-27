@@ -26,26 +26,51 @@ interface HomePageData {
 }
 
 const HomeScreen = () => {
-  const [data, setData] = useState<HomePageData | null>(null);
+  const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await httpClient.get("/pages/home");
-        let data = response.data.homepage;
+        let data = {
+          title: "Congrès National des Dentistes de France 2024",
+          subtitle:
+            "Un rendez-vous incontournable pour les professionnels du secteur dentaire.",
+          sections: [
+            {
+              id: "hero",
+              type: "banner",
+              headline:
+                "Rejoignez-nous au Congrès National des Dentistes de France",
+              subheadline:
+                "Découvrez les dernières innovations et techniques dentaires.",
+              backgroundImage: "https://via.placeholder.com/1920x1080",
+              cta: {
+                text: "Inscrivez-vous maintenant",
+                url: "https://www.dentistesfrance2024.com/inscription",
+              },
+            },
+            {
+              id: "about",
+              type: "info",
+              title: "À propos de l'événement",
+              content:
+                "Le Congrès National des Dentistes de France est le plus grand événement annuel réunissant des professionnels du secteur dentaire. Cette année, nous mettons un accent particulier sur la dentisterie numérique, les soins préventifs et la santé bucco-dentaire globale.",
+              image: "https://via.placeholder.com/800x400",
+            },
+          ],
+        };
         setData({
           hero: {
-            headline: data.sections[0].headline,
-            subheadline: data.sections[0].subheadline,
-            image: data.sections[0].backgroundImage,
+            headline: data.sections[0].headline as string,
+            subheadline: data.sections[0].subheadline as string,
+            image: data.sections[0].backgroundImage as string,
           },
           info: {
-            title: data.sections[1].title,
-            content: data.sections[1].content,
-            image: data.sections[1].image,
+            title: data.sections[1].title as string,
+            content: data.sections[1].content as string,
+            image: data.sections[1].image as string,
           },
-          schedule: data.sections[2].items,
         });
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
@@ -86,7 +111,6 @@ const HomeScreen = () => {
         content={data.info.content}
         image={data.info.image}
       />
-      <ScheduleSection schedule={data.schedule} />
     </ScrollView>
   );
 };

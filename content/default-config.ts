@@ -3,8 +3,8 @@ import { Config } from "@/features/config/api/get-config";
 export const initialState: Config = {
   appName: "My App",
   theme: {
-    primaryColor: "#6200ee",
-    secondaryColor: "#03dac6",
+    primaryColor: "#0B162C",
+    secondaryColor: "#3B556D",
     tertiaryColor: "#ffffff",
     quaternaryColor: "#000000",
     primaryTextColor: "#000000",

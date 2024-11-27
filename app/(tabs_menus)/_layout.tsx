@@ -1,19 +1,31 @@
 import useConfigStore from "@/stores/config-store";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 export default function TabLayout() {
   const tabBarConfig = useConfigStore(
     (state) => state.config.tabBarConfig.listTabs
   );
-  console.log(tabBarConfig);
-
+  const secondaryColor = useConfigStore(
+    (state) => state.config.theme.secondaryColor
+  );
+  const { t } = useTranslation();
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: secondaryColor,
+        tabBarStyle: {
+          backgroundColor: "#fff",
+          borderTopColor: "#f4f4f4",
+          borderTopWidth: 0,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: tabBarConfig.find((el) => el.name === "index")?.title,
+          title: t(tabBarConfig.find((el) => el.name === "index")?.title!),
           href: tabBarConfig.find((el) => el.name === "index") ? `/` : null,
           tabBarIcon: ({ color }) => (
             <FontAwesome size={28} name="home" color={color} />
@@ -23,7 +35,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="partners"
         options={{
-          title: tabBarConfig.find((el) => el.name === "partners")?.title,
+          title: t(tabBarConfig.find((el) => el.name === "partners")?.title!),
           href: tabBarConfig.find((el) => el.name === "partners")
             ? `/partners`
             : null,
@@ -35,7 +47,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="program"
         options={{
-          title: tabBarConfig.find((el) => el.name === "program")?.title,
+          title: t(tabBarConfig.find((el) => el.name === "program")?.title!),
           href: tabBarConfig.find((el) => el.name === "program")
             ? `/program`
             : null,
@@ -47,7 +59,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: tabBarConfig.find((el) => el.name === "settings")?.title,
+          title: t(tabBarConfig.find((el) => el.name === "settings")?.title!),
           href: tabBarConfig.find((el) => el.name === "settings")
             ? `/settings`
             : null,

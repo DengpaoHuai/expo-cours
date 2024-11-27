@@ -2,5 +2,9 @@
   "title": "THE BIG TITLE OF THE WEBSITE",
   "form_validation": {
     "too_long": "bro, really ? It's impossible to have a name that long. Please be serious with me or I'll be forced to kick you out of the website."
-  }
+  },
+  "Home": "Home",
+  "Program": "Program",
+  "Partners": "Partners",
+  "Settings": "Settings"
 }
