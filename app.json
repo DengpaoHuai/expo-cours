@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.congressante.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,6 +24,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      ["onesignal-expo-plugin"],
       "expo-router",
       [
         "expo-splash-screen",

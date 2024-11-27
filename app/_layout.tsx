@@ -5,11 +5,13 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import "react-native-reanimated";
-
+import { LogLevel, OneSignal } from "react-native-onesignal";
 import { getConfig } from "@/features/config/api/get-config";
 import useConfigStore from "@/stores/config-store";
 import { I18nextProvider, useTranslation } from "react-i18next";
 import i18n from "@/lang/lang";
+
+OneSignal.initialize("28246c2b-c227-423a-bd2f-5da6fb8e980a");
 
 SplashScreen.preventAutoHideAsync();
 
@@ -23,6 +25,7 @@ export default function RootLayout() {
     getConfig()
       .then((config) => {
         setConfig(config.data);
+        OneSignal.Notifications.requestPermission(true);
       })
       .catch((error) => {
         console.error(error);
