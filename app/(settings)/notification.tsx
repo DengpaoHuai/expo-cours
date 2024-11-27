@@ -8,30 +8,17 @@ const NotificationsSettingsScreen = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Initialiser OneSignal avec votre App ID
-    // Vérifier l'état actuel des permissions
-    //   checkNotificationPermission();
+    OneSignal.Notifications.canRequestPermission().then((response) => {
+      if (response) {
+        OneSignal.Notifications.requestPermission(true);
+        OneSignal.Notifications.getPermissionAsync().then((response) => {
+          setIsEnabled(response);
+        });
+      }
+    });
   }, []);
 
-  const toggleSwitch = async (value) => {
-    /*  if (value) {
-      // Demander la permission de recevoir des notifications
-      const response =
-        await OneSignal.promptForPushNotificationsWithUserResponse();
-      if (response) {
-        setIsEnabled(true);
-        Alert.alert("Notifications activées");
-      } else {
-        setIsEnabled(false);
-        Alert.alert("Les notifications sont désactivées");
-      }
-    } else {
-      // Désactiver les notifications
-      await OneSignal.disablePush(true);
-      setIsEnabled(false);
-      Alert.alert("Notifications désactivées");
-    }*/
-  };
+  const toggleSwitch = async (value) => {};
 
   return (
     <View style={styles.container}>
