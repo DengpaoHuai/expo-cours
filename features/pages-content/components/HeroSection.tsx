@@ -15,11 +15,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   console.log("HeroSectionProps", headline, subheadline, image);
   return (
     <View style={styles.heroContainer}>
-      <ImageBackground source={{ uri: image }} style={styles.backgroundImage}>
-        <View style={styles.textContainer}>
+      <ImageBackground
+        source={require("../../../assets/images/head.jpg")}
+        style={styles.backgroundImage}
+        resizeMode={"cover"}
+      >
+        {/* 
+          <View style={styles.textContainer}>
           <Text style={styles.headline}>{headline}</Text>
           <Text style={styles.subheadline}>{subheadline}</Text>
         </View>
+          */}
       </ImageBackground>
     </View>
   );

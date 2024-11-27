@@ -106,11 +106,7 @@ const HomeScreen = () => {
         subheadline={data.hero.subheadline}
         image={data.hero.image}
       />
-      <InfoSection
-        title={data.info.title}
-        content={data.info.content}
-        image={data.info.image}
-      />
+      <InfoSection />
     </ScrollView>
   );
 };

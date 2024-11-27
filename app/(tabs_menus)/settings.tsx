@@ -7,6 +7,12 @@ const Settings = () => {
     <View>
       <Text>Settings</Text>
       <Button
+        title="FAQ"
+        onPress={() => {
+          router.push("/(settings)/notification");
+        }}
+      />
+      <Button
         title="Go to Home"
         onPress={
           async () => {
