@@ -16,7 +16,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.congressante.app"
     },
     "web": {
       "bundler": "metro",
@@ -24,7 +25,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      ["onesignal-expo-plugin"],
+      [
+        "onesignal-expo-plugin",
+        {
+          "mode": "development"
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
@@ -39,6 +45,31 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "build": {
+          "experimental": {
+            "ios": {
+              "appExtensions": [
+                {
+                  "targetName": "OneSignalNotificationServiceExtension",
+                  "bundleIdentifier": "com.congressante.app.OneSignalNotificationServiceExtension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.congressante.app.onesignal"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "projectId": "c7e17468-da4b-4bdd-a746-e2299517c555"
+      },
+      "router": {
+        "origin": false
+      }
     }
   }
 }

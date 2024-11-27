@@ -16,14 +16,26 @@ export const initialState: Config = {
     listTabs: [
       {
         id: 1,
-        name: "Home",
+        name: "index",
         icon: "home",
         title: "Home",
       },
       {
         id: 2,
-        name: "Settings",
-        icon: "address-book-o",
+        name: "partners",
+        icon: "calendar",
+        title: "Partners",
+      },
+      {
+        id: 3,
+        name: "program",
+        icon: "gift",
+        title: "Program",
+      },
+      {
+        id: 4,
+        name: "settings",
+        icon: "user",
         title: "Settings",
       },
     ],
