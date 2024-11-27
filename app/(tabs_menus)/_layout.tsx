@@ -1,3 +1,4 @@
+import CustomHeader from "@/components/ui/CustomHeader";
 import useConfigStore from "@/stores/config-store";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs } from "expo-router";
@@ -20,6 +21,7 @@ export default function TabLayout() {
           borderTopColor: "#f4f4f4",
           borderTopWidth: 0,
         },
+        header: CustomHeader,
       }}
     >
       <Tabs.Screen
