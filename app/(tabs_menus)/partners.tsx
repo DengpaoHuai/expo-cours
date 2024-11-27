@@ -1,15 +1,24 @@
-import useUser from "@/stores/user-store";
-import { Text, View } from "react-native";
+import SponsorsSection from "../../features/pages-content/components/SponsorsSection";
 
-const Partners = () => {
-  const { user } = useUser();
+const sponsors = [
+	{
+		name: "Champions",
+		// logo: require("../../../assets/images/sponsors/champions.png"),
+		link: "https://champions-implants.com/fr",
+	},
+	{
+		name: "KLS Martin",
+		// logo: require("../../../assets/images/sponsors/klsmartin.png"),
+		link: "https://www.klsmartin.com/de/",
+	},
+];
 
-  return (
-    <View>
-      <Text>Partners</Text>
-      <Text>{user}</Text>
-    </View>
-  );
+const Partenrs = () => {
+
+	return (
+		<SponsorsSection sponsors={sponsors} />
+	);
 };
 
-export default Partners;
+export default Partenrs;
+

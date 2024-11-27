@@ -1,38 +1,23 @@
-import { router } from "expo-router";
-import { Button, Text, View } from "react-native";
-import { OneSignal } from "react-native-onesignal";
 
-const Settings = () => {
-  return (
-    <View>
-      <Text>Settings</Text>
-      <Button
-        title="Go to Home"
-        onPress={
-          async () => {
-            const ok = await OneSignal.Notifications.canRequestPermission();
-            console.log(ok);
-            await OneSignal.Notifications.requestPermission(true);
-            console.log("modif");
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import SubPage from "../../components/ui/SubPage";
 
-            OneSignal.Notifications.canRequestPermission().then((response) => {
-              console.log(response);
-            });
-            OneSignal.Notifications.getPermissionAsync().then((response) => {
-              console.log(response);
-            });
-          }
-          /*     OneSignal.Notifications.canRequestPermission().then((response) => {
-              console.log(response);
-            })*/
+const SettingsScreen = () => {
+	const navigation = useNavigation();
 
-          /*    OneSignal.Notifications.getPermissionAsync().then((response) => {
-            console.log(response);
-          })*/
-        }
-      />
-    </View>
-  );
+	return (
+		
+	);
 };
 
-export default Settings;
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		padding: 20,
+		backgroundColor: "#f5f5f5",
+	},
+});
+
+export default SettingsScreen;
